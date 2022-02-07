@@ -8,3 +8,5 @@
 4. Do the makefile on the server whenever you submit
 
 5. Most importantly, we still must do our write up for the project after you are done with testing
+
+**Also! If you want to make a branch for this whenever you pull no prob Or just commit directly to the main branch. Either way is fine.

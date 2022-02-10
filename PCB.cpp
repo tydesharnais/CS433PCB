@@ -39,8 +39,8 @@ class PCB{
         //Inline functions for optimization and decreased function overhead
         
         int get_PID(){return PID;};
-        int set_PID(int num){PID = num;};
-        int set_PRIORITY(int num){priority = num;};
+        void set_PID(int num){PID = num;};
+        void set_PRIORITY(int num){priority = num;};
         STATE get_STATE(){return currentState;};
         int get_PRIORITY(){return priority;};
         void set_STATE(STATE nS){currentState = nS;};
@@ -58,7 +58,8 @@ class PCB{
 
 std::ostream& operator<<(std::ostream& os, const PCB &s) {
     
-    os << "PROCESS ID: " << s.PID << "\t PROIRTY: " << s.priority << "\t CURRENT_STATE: " << s.currentState << std::endl;
+     os << "PROCESS ID: " << s.PID << "\t PROIRTY: " << s.priority << "\t CURRENT_STATE: " << s.currentState << std::endl;
+
 }
 
 std::string PCB::state_HELPER(){
@@ -80,4 +81,5 @@ std::string PCB::state_HELPER(){
             return "TERMINATED";
             break;
     }
+    return "ERROR";
 }

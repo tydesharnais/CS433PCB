@@ -118,7 +118,7 @@ void test2(ReadyQueue& q2) {
     //from the queue a million times.
     auto start = clock();// store the clock time at the begining of the loop
     for (int i = 0; i < 1000000; i++) {
-        cout << count<<endl << endl;
+
         int pick = rand() % 2;
         
         //if pick is 0 we will remove from queue if not empty

@@ -124,7 +124,7 @@ void MaxHeap::heapify(int i){  //heapify and bubble up
         largest = right;
     }
     if(largest != i){ //largest was not the parent
-        cout << "Swap Between " << pcbHeap.at(i)->get_PRIORITY() << " and " << pcbHeap.at(largest)->get_PRIORITY() <<endl;
+        //cout << "Swap Between " << pcbHeap.at(i)->get_PRIORITY() << " and " << pcbHeap.at(largest)->get_PRIORITY() <<endl;
         swap_PCB(pcbHeap.at(i), pcbHeap.at(largest));
        
         heapify(largest);

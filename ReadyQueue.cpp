@@ -34,8 +34,11 @@ void ReadyQueue::display(){
     int counter =0;
     for(auto i : heap.pcbHeap){
         while(counter < heap.size){
-            PCB* tmp = i;
-            cout << tmp << endl;
+            PCB tmp;
+            int id = tmp.get_PID();
+            int pri = tmp.get_PRIORITY();
+            PCB::STATE stat = tmp.get_STATE();
+            cout << "PROCESS ID = " << id <<" PRIORITY = " << pri << "STATE = " << stat << endl;
             counter++;
         }
     }

@@ -116,7 +116,8 @@ void test2(ReadyQueue& q2) {
     int count = 0;
     //for loop to run through the process of adding or removing 
     //from the queue a million times.
-    auto start = clock();// store the clock time at the begining of the loop
+    clock_t start, end;
+    start = clock();// store the clock time at the begining of the loop
     for (int i = 0; i < 1000000; i++) {
 
         int pick = rand() % 2;
@@ -140,10 +141,11 @@ void test2(ReadyQueue& q2) {
         if (count == 1000)
             count = 0;
     }
-    auto end = clock() - start; // subtract the start time from the end time.
+    end = clock() - start; // subtract the start time from the end time.
+    double time = double(end - start) / double(CLOCKS_PER_SEC);
     q2.display();//display final queue
     //print statment to show total time it took in miliseconds
-    cout << "Test 2 is finished and took " << end / 1000 << " ms.\n";
+    cout << "Test 2 is finished and took " << time  << setprecision(5) << " seconds.\n";
 }
 int main(){
 

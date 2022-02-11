@@ -17,24 +17,37 @@ at the top to create a system for easy removal based on priority.
 #include <time.h>
 #include <map>
 #include "ReadyQueue.cpp"
-#include "PCB.cpp"
+
 
 
 using namespace std;
 
 void test1(ReadyQueue& q1)
 {
-    std::cout << "// TEST 1\n";
-
+    cout << "__________________________START_____OF______TEST_2_________________________\n";
+    PCB p1;//initialize the PCB class to enter into queue
+    PCB blocks[25];
+    int count = 0;
+    
     // START OF TEST 1 
-    q1.size(20);
+    
 
     // 1) Add processes 14, 1, 28, 39 and 18 to 𝑞1. 
-    q1.addPCB(14);
-    q1.addPCB(1);
-    q1.addPCB(28);
-    q1.addPCB(39);
-    q1.addPCB(18);
+    blocks[count] = PCB(14, 0);
+    q1.addPCB(blocks[count]);
+    count++;
+    blocks[count] = PCB(1, 0);
+    q1.addPCB(blocks[count]);
+    count++;
+    blocks[count] = PCB(28, 0);
+    q1.addPCB(blocks[count]);
+    count++;
+    blocks[count] = PCB(39, 0);
+    q1.addPCB(blocks[count]);
+    count++;
+    blocks[count] = PCB(18, 0);
+    q1.addPCB(blocks[count]);
+    count++;
     //Display the content of 𝑞1
     q1.display(); 
 
@@ -44,10 +57,18 @@ void test1(ReadyQueue& q1)
     q1.display();
 
     // 3) Add processes 48, 10, 31, 19 to 𝑞1.
-    q1.addPCB(48);
-    q1.addPCB(10);
-    q1.addPCB(31);
-    q1.addPCB(19);
+    blocks[count] = PCB(48, 0);
+    q1.addPCB(blocks[count]);
+    count++;
+    blocks[count] = PCB(10, 0);
+    q1.addPCB(blocks[count]);
+    count++;
+    blocks[count] = PCB(31, 0);
+    q1.addPCB(blocks[count]);
+    count++;
+    blocks[count] = PCB(19, 0);
+    q1.addPCB(blocks[count]);
+    count++;
     //Display the content of 𝑞1
     q1.display();
 
@@ -56,10 +77,18 @@ void test1(ReadyQueue& q1)
     q1.display();
 
     // 5) Add processes 29, 41, 18, 46 to 𝑞1. Display the content of 𝑞1
-    q1.addPCB(29);
-    q1.addPCB(41);
-    q1.addPCB(18);
-    q1.addPCB(46);
+    blocks[count] = PCB(29, 0);
+    q1.addPCB(blocks[count]);
+    count++;
+    blocks[count] = PCB(41, 0);
+    q1.addPCB(blocks[count]);
+    count++;
+    blocks[count] = PCB(18, 0);
+    q1.addPCB(blocks[count]);
+    count++;
+    blocks[count] = PCB(46, 0);
+    q1.addPCB(blocks[count]);
+    count++;
     q1.display();
     
 
@@ -71,23 +100,27 @@ void test1(ReadyQueue& q1)
     // END OF TEST 1
 }
 void test2(ReadyQueue& q2) {
-
+    cout << "__________________________START_____OF______TEST_2_________________________\n";
     srand(time(NULL));//established for the random generator
-    PCB p1;//initialize the PCB class to enter into queue
+    PCB blocks[1000];//initialize the PCB class to enter into queue
+   
 
     //loop to add 100 elements to the queue
     for (int i = 0; i < 100; i++) {
-        int random = rand () % 50;
-        q2.addPCB(p1.(i + 1,random));
+        blocks[i] = PCB(i, 1 + (rand() % 50));
+        q2.addPCB(blocks[i]);
         
     }
     //
     int heapNum = 101;
+    int count = 0;
     //for loop to run through the process of adding or removing 
     //from the queue a million times.
-    start = clock();// store the clock time at the begining of the loop
+    auto start = clock();// store the clock time at the begining of the loop
     for (int i = 0; i < 1000000; i++) {
+        cout << count<<endl << endl;
         int pick = rand() % 2;
+        
         //if pick is 0 we will remove from queue if not empty
         if (pick == 0) {
             //if to check if queue is empty
@@ -97,13 +130,17 @@ void test2(ReadyQueue& q2) {
         else {
             //random int to pick priority
             int random2 = rand() % 50;
+            blocks[count] = PCB(heapNum, random2);
             //add to queue the new pcb
-            q2.addPCB(p1.(heapNum, random));
+            q2.addPCB(blocks[count]);
             //increment for the next pcb
             heapNum++;
+            count++;
         }
+        if (count == 1000)
+            count = 0;
     }
-    end = clock() - start; // subtract the start time from the end time.
+    auto end = clock() - start; // subtract the start time from the end time.
     q2.display();//display final queue
     //print statment to show total time it took in miliseconds
     cout << "Test 2 is finished and took " << end / 1000 << " ms.\n";
@@ -114,8 +151,8 @@ int main(){
     
     test1(q1);//call test 1
     test2(q1);//call test2
-    /*
-    //m_UserInfoMap.insert(std::make_pair<User, int>(User("Mr.X", "3"), 100) );
+    
+    /*/m_UserInfoMap.insert(std::make_pair<User, int>(User("Mr.X", "3"), 100) );
     PCB blocks[10];
     int count = 1;
 
@@ -127,7 +164,7 @@ int main(){
         count++;
     }
     q1.display();
-    */
+    
     /*
     for(int i=0; i < 10; i++){
         cout << blocks[i] << endl;   

@@ -12,11 +12,14 @@ at the top to create a system for easy removal based on priority.
 */
 
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <stdlib.h> //srand, rand
 #include <time.h>
 #include <map>
-#include "ReadyQueue.cpp"
+#include "ReadyQueue.h"
+#include "PCB.h"
+
 
 
 
@@ -102,7 +105,7 @@ void test1(ReadyQueue& q1)
 void test2(ReadyQueue& q2) {
     cout << "__________________________START_____OF______TEST_2_________________________\n";
     srand(time(NULL));//established for the random generator
-    PCB blocks[1000];//initialize the PCB class to enter into queue
+    PCB blocks[100];//initialize the PCB class to enter into queue
    
 
     //loop to add 100 elements to the queue
@@ -130,7 +133,7 @@ void test2(ReadyQueue& q2) {
         //else statment if pick is 1 to add to queue and asign random priority
         else {
             //random int to pick priority
-            int random2 = rand() % 50;
+            int random2 = 1+rand() % 50;
             blocks[count] = PCB(heapNum, random2);
             //add to queue the new pcb
             q2.addPCB(blocks[count]);
@@ -138,14 +141,14 @@ void test2(ReadyQueue& q2) {
             heapNum++;
             count++;
         }
-        if (count == 1000)
+        if (count == 100)
             count = 0;
     }
     end = clock() - start; // subtract the start time from the end time.
     double time = double(end - start) / double(CLOCKS_PER_SEC);
     q2.display();//display final queue
     //print statment to show total time it took in miliseconds
-    cout << "Test 2 is finished and took " << time  << setprecision(5) << " seconds.\n";
+    cout << "Test 2 is finished and took " << std::setprecision(5) <<time << " seconds.\n";
 }
 int main(){
 
@@ -153,42 +156,6 @@ int main(){
     
     test1(q1);//call test 1
     test2(q1);//call test2
-    
-    /*/m_UserInfoMap.insert(std::make_pair<User, int>(User("Mr.X", "3"), 100) );
-    PCB blocks[10];
-    int count = 1;
-
-    for(int i=0; i < 10; i++){
-       // cout << i <<":\n" <<endl;
-        blocks[i] = PCB(count, 1+(rand()%50));
-        q1.addPCB(blocks[i]);
-      //  heap.printHeapLevels();
-        count++;
-    }
-    q1.display();
-    
-    /*
-    for(int i=0; i < 10; i++){
-        cout << blocks[i] << endl;   
-    }
-    heap.printHeapLevels();
-    */
-   /*
-    while(!q1.isEmpty()){
-       // cout << "Removing ID" << heap.peek_min()->get_PID() << "Priority: " << heap.peek_min()->get_PRIORITY() << endl;
-        q1.removePCB(); 
-       // heap.printHeapLevels();
-    }
-    */
-    /*
-    for(int i=0; i < 10; i++){
-        cout << blocks[i] << endl;   
-    }
-    */
-
-
-
-
 
     return 0;
 }

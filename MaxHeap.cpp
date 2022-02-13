@@ -1,82 +1,39 @@
 #include <iostream>
 #include <vector>
-#include "PCB.cpp"
+#include "MaxHeap.h"
 
 using namespace std;
 
 #define INT_MIN -999999
 #define INT_MAX 999999
 
-class MaxHeap{
-    friend class PCB;
-    friend class ReadyQueue;
-    
+MaxHeap::MaxHeap() {
+   
+}
 
-    private:
+MaxHeap::MaxHeap(int size) {
 
-        int capacity; //For display optional 
+    this->capacity = capacity;
+    this->size = size;
+    this->heap = new int[size];
+    for (int i = 0; i < size; i++) {
+        heap[i] = i;
+    }
+}
+//Inline Functions for optimization and decreased function overhead
 
-        int size;  //Current size of Heap
-        int* heap; //pointer for heap array
+int MaxHeap::getSize() { return size; }
+int MaxHeap::getCapacity() { return capacity; }
+bool MaxHeap::isEmpty() { if (size <= 0) { return true; }return false; }
+int MaxHeap::parent(int i) { return (i - 1) / 2; }
+int MaxHeap::leftChild(int i) { return 2 * i + 1; }
+int MaxHeap::rightChild(int i) { return 2 * i + 2; }
+int MaxHeap::get_SIZE() { return size; };
 
-        vector<PCB*> pcbHeap;
-        
-        
-    
-    public:
-
-        //Priority Queue init - mockArray tells us to be a priority queue. USE THIS!
-        MaxHeap(){
-            size = 0;
-        }
-
-
-        MaxHeap(int size){
-            
-            this->capacity = capacity;
-            this->size = size;
-            this->heap = new int[size];
-            for(int i= 0; i < size; i++){
-                heap[i] = i;
-            }
-        }
-
-        /*Methods*/  
-        
-        //Getters
-        
-        //Inline Functions for optimization and decreased function overhead
-
-        int getSize(){return size;}
-        int getCapacity(){return capacity;}
-        bool isEmpty(){if(size <= 0){return true;}return false;}
-        int parent(int i){return (i -1)/2;}
-        int leftChild(int i){return 2 * i +1;}
-        int rightChild(int i){return 2 * i +2;} 
-
-        //Min-Heap Main functions
-
-        void buildHeap(); //build OG heap
-        void heapify(int i); //heapify and bubble up + array of pcbHeap
-        PCB* peek_min(); //returns minimum element from heap
-        void pop_top();
-        
-        //Aux functions for the heap
-        void swap_PCB(PCB *a, PCB *b);
-        void swap(int &a, int &b);
-        void printHeapLevels(); //print heap levels
-        void printHeap(); //basic print
-        int get_SIZE(){return size;};
-
-        //Insert function
-        void insert_PCB(PCB &new_PCB);
-
-        void debugHelper(int left, int right, int cur_Largest);
-};
 
 void MaxHeap::insert_PCB(PCB &new_PCB){
     size++;
-    new_PCB.set_STATE(PCB::STATE::READY); //set new state to ready
+    new_PCB.set_STATE(pcbSate::STATE::READY); //set new state to ready
     pcbHeap.emplace_back(&new_PCB); //inserts new PCB
     int count = size -1;
 
@@ -84,7 +41,7 @@ void MaxHeap::insert_PCB(PCB &new_PCB){
       swap_PCB(pcbHeap.at(parent(count)),pcbHeap.at(count));
       count = parent(count);
     }
-   // heapify(size -1);
+    heapify(size -1);
 }
 
 /**
@@ -137,14 +94,14 @@ void MaxHeap::pop_top(){
     }
     else if(size ==1){
         PCB* ref_PCB = pcbHeap.at(0);
-        ref_PCB->set_STATE(PCB::STATE::RUNNING);
+        ref_PCB->set_STATE(pcbSate::STATE::RUNNING);
         pcbHeap.pop_back();
         size--;
     }
     else{
         swap_PCB(pcbHeap.at(0), pcbHeap.at(size - 1));
         PCB* ref_PCB = pcbHeap.at(size-1);
-        ref_PCB->set_STATE(PCB::STATE::RUNNING);
+        ref_PCB->set_STATE(pcbSate::STATE::RUNNING);
         pcbHeap.pop_back();
         size--;
         heapify(0);
@@ -155,9 +112,9 @@ PCB* MaxHeap::peek_min(){
     if(isEmpty()==true){
         cout << "Queue is empty!" << endl;
     }
-    else{
-        return pcbHeap.at(0);
-    }
+    return pcbHeap.at(0);
+    
+    
 }
         
 //Aux functions for the heap

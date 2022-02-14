@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <iomanip>
 #include "MaxHeap.h"
 
 using namespace std;
@@ -163,3 +164,16 @@ void MaxHeap::printHeap(){
     cout << endl;
 }
 
+void MaxHeap::display()
+{
+ 
+    if (pcbHeap.size()==0) {
+        std::cout << "empty\n";
+    }
+ 
+    for (unsigned int i = 0; i < pcbHeap.size(); ++i) {
+
+        cout << "Process ID:   " << pcbHeap[i]->PID << "   Priority:   " << pcbHeap[i]->priority << "   Current State:   " << pcbSate::enumList[ pcbHeap[i]->currentState] << "\n";
+
+    }
+}

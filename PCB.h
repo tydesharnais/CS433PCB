@@ -11,7 +11,7 @@ namespace pcbSate {
         TERMINATED
     };
     
-    //const STATE enumList[5] = { "NEW", "WAITING", "TERMINATED", "RUNNING", "READY" };
+    const std::string enumList[5] = { "NEW", "WAITING", "TERMINATED", "RUNNING", "READY" };
 }
 class PCB {
     friend class ReadyQueue;

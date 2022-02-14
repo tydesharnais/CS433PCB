@@ -30,4 +30,5 @@ public:
 	void swap(int& a, int& b);
 	void printHeapLevels();
 	void printHeap();
+	void display();
 };

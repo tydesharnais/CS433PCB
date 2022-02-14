@@ -27,10 +27,10 @@ using namespace std;
 
 void test1(ReadyQueue& q1)
 {
-    cout << "__________________________START_____OF______TEST_2_________________________\n";
+    cout << "__________________________START_____OF______TEST_1_________________________\n";
     PCB p1;//initialize the PCB class to enter into queue
     PCB blocks[25];
-    int count = 0;
+    int count = 1;
     
     // START OF TEST 1 
     
@@ -105,7 +105,8 @@ void test1(ReadyQueue& q1)
 void test2(ReadyQueue& q2) {
     cout << "__________________________START_____OF______TEST_2_________________________\n";
     srand(time(NULL));//established for the random generator
-    PCB blocks[100];//initialize the PCB class to enter into queue
+    PCB p1;
+    PCB blocks[200];//initialize the PCB class to enter into queue
    
 
     //loop to add 100 elements to the queue

@@ -1,7 +1,9 @@
 #include "PCB.h"
 #include <vector>
 #include <iostream>
-
+#pragma once
+#ifndef MAXHEAP_H
+#define MAXHEAP_H
 class MaxHeap {
 	friend class PCB;
 	friend class ReadyQueue;
@@ -32,3 +34,4 @@ public:
 	void printHeap();
 	void display();
 };
+#endif

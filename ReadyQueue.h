@@ -1,5 +1,7 @@
 #include "MaxHeap.h"
-
+#pragma once
+#ifndef READYQUEUE_H
+#define READYQUEUE_H
 class ReadyQueue {
 	friend class PCB;
 	friend class MaxHeap;
@@ -13,3 +15,4 @@ public:
 	bool isEmpty();
 
 };
+#endif

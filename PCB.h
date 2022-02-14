@@ -1,6 +1,7 @@
 #include <string>
 #pragma once
-
+#ifndef PCB_H
+#define PCB_H
 namespace pcbSate {
     //Enums for State of PCB
     enum STATE {
@@ -31,3 +32,4 @@ public:
     void set_STATE(pcbSate::STATE nS);
     
 };
+#endif

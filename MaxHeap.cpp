@@ -36,12 +36,7 @@ void MaxHeap::insert_PCB(PCB &new_PCB){
     size++;
     new_PCB.set_STATE(pcbSate::STATE::READY); //set new state to ready
     pcbHeap.emplace_back(&new_PCB); //inserts new PCB
-    int count = size -1;
 
-    while(count != 0 && pcbHeap.at(parent(count))->get_PRIORITY() < pcbHeap.at(count)->get_PRIORITY()){ 
-      swap_PCB(pcbHeap.at(parent(count)),pcbHeap.at(count));
-      count = parent(count);
-    }
     heapify(size -1);
 }
 
@@ -66,28 +61,32 @@ void MaxHeap::debugHelper(int left, int right, int cur_Largest){
     cout << "Curr Index largest: " << cur_Largest << " and is: " << pcbHeap.at(cur_Largest)->get_PRIORITY() << endl;
     
 };
+void MaxHeap::heapify(int i) {  //heapify and bubble up
 
-void MaxHeap::heapify(int i){  //heapify and bubble up
-    
     int left = leftChild(i);
     int right = rightChild(i);
     int largest = i;
-  //  debugHelper(left, right, largest);
-    
-    //Must find the largest element in the heap
-    if(left < size && pcbHeap.at(left)->get_PRIORITY() > pcbHeap.at(i)->get_PRIORITY()){ //left is largest
-        largest = left;
+    //  debugHelper(left, right, largest);
+
+      //Must find the largest element in the heap
+    if (left < size) {
+        if (pcbHeap.at(left)->get_PRIORITY() > pcbHeap.at(i)->get_PRIORITY()) { //left is largest
+            largest = left;
+        }
     }
-    if(right < size && pcbHeap.at(right)->get_PRIORITY() > pcbHeap.at(largest)->get_PRIORITY()){ //right is largest 
+    if (right < size){
+        if( pcbHeap.at(right)->get_PRIORITY() > pcbHeap.at(largest)->get_PRIORITY()) { //right is largest 
         largest = right;
     }
-    if(largest != i){ //largest was not the parent
-        //cout << "Swap Between " << pcbHeap.at(i)->get_PRIORITY() << " and " << pcbHeap.at(largest)->get_PRIORITY() <<endl;
+}
+    if (largest != i) { //largest was not the parent
+        
         swap_PCB(pcbHeap.at(i), pcbHeap.at(largest));
-       
+
         heapify(largest);
     }
 };
+
 
 void MaxHeap::pop_top(){
     if(isEmpty()==true){
@@ -138,42 +137,19 @@ void MaxHeap::swap(int &a, int &b){
     b = temp;
 };
 
-void MaxHeap::printHeapLevels(){
 
-    int power = 0;
-    int value = 1;
-    for(int i=0; i <size; i++){
-        if(i == value){
-            cout<<endl;
-            power+=1;
-            value+= (1<<power);
-        }
-        cout << "ID:" << pcbHeap.at(i)->get_PID() << "  ";
-        cout << "Priority:" << pcbHeap.at(i)->get_PRIORITY() << "  ";
-    }
-    cout << endl;
-
-}; 
-
-//print heap
-
-void MaxHeap::printHeap(){
-    for(int i=0; i <size; i++){
-        cout << &pcbHeap.at(i) << " ";
-    }
-    cout << endl;
-}
 
 void MaxHeap::display()
 {
- 
+    size = pcbHeap.size();
+    unsigned int j = pcbHeap.size();
     if (pcbHeap.size()==0) {
         std::cout << "empty\n";
     }
- 
-    for (unsigned int i = 0; i < pcbHeap.size(); ++i) {
 
-        cout << "Process ID:   " << pcbHeap[i]->PID << "   Priority:   " << pcbHeap[i]->priority << "   Current State:   " << pcbSate::enumList[ pcbHeap[i]->currentState] << "\n";
+    for (unsigned int i = 0; i < j; ++i) {
+
+        cout << "Process ID:"<<setw(8) << pcbHeap[i]->PID <<setw(10)<< "Priority:"<<setw(8) << pcbHeap[i]->priority << setw(10) << "Current State:"<<setw(8) << pcbSate::enumList[ pcbHeap[i]->currentState] << "\n";
 
     }
 }

@@ -16,7 +16,7 @@ namespace pcbSate {
 }
 class PCB {
     friend class ReadyQueue;
-    friend std::ostream& operator<<(std::ostream& os, const PCB& s);
+   // friend std::ostream& operator<<(std::ostream& os, const PCB& s);
 public:
     pcbSate::STATE currentState;
     int PID;   //Process ID - static 

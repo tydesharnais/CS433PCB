@@ -28,7 +28,6 @@ using namespace std;
 void test1(ReadyQueue& q1)
 {
     cout << "__________________________START_____OF______TEST_1_________________________\n";
-    PCB p1;//initialize the PCB class to enter into queue
     PCB blocks[25];
     int count = 1;
     

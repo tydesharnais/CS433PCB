@@ -30,8 +30,6 @@ public:
 	PCB* peek_min();
 	void swap_PCB(PCB* a, PCB* b);
 	void swap(int& a, int& b);
-	void printHeapLevels();
-	void printHeap();
 	void display();
 };
 #endif

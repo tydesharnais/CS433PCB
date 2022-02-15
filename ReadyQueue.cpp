@@ -16,6 +16,5 @@ ReadyQueue::ReadyQueue()
 void ReadyQueue::display(){
    
     heap.display();
-
     
 }

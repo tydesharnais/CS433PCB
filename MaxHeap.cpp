@@ -7,11 +7,11 @@ using namespace std;
 
 #define INT_MIN -999999
 #define INT_MAX 999999
-
+//constructor
 MaxHeap::MaxHeap() {
    
 }
-
+//constructor
 MaxHeap::MaxHeap(int size) {
 
     this->capacity = capacity;
@@ -22,7 +22,6 @@ MaxHeap::MaxHeap(int size) {
     }
 }
 //Inline Functions for optimization and decreased function overhead
-
 int MaxHeap::getSize() { return size; }
 int MaxHeap::getCapacity() { return capacity; }
 bool MaxHeap::isEmpty() { if (size <= 0) { return true; }return false; }
@@ -31,7 +30,7 @@ int MaxHeap::leftChild(int i) { return 2 * i + 1; }
 int MaxHeap::rightChild(int i) { return 2 * i + 2; }
 int MaxHeap::get_SIZE() { return size; };
 
-
+//insearting a PCB into the heap and balancing the heap
 void MaxHeap::insert_PCB(PCB &new_PCB){
     size++;
     new_PCB.set_STATE(pcbSate::STATE::READY); //set new state to ready
@@ -52,7 +51,7 @@ void MaxHeap::buildHeap()
 		heapify(i); 
 	} 
 } 
-
+//help with debugging the heap
 void MaxHeap::debugHelper(int left, int right, int cur_Largest){
     cout << "\n------DEBUG HELPER-------\n";
     cout << "Curr Size: " << size << endl;
@@ -68,17 +67,18 @@ void MaxHeap::heapify(int i) {  //heapify and bubble up
     int largest = i;
     //  debugHelper(left, right, largest);
 
-      //Must find the largest element in the heap
+      //Must find the largest element in the heap through left side of tree
     if (left < size) {
         if (pcbHeap.at(left)->get_PRIORITY() > pcbHeap.at(i)->get_PRIORITY()) { //left is largest
             largest = left;
         }
+    }//must find largest element through right side of tree
+    if (right < size) {
+        if (pcbHeap.at(right)->get_PRIORITY() > pcbHeap.at(largest)->get_PRIORITY()) { //right is largest 
+            largest = right;
+        }
     }
-    if (right < size){
-        if( pcbHeap.at(right)->get_PRIORITY() > pcbHeap.at(largest)->get_PRIORITY()) { //right is largest 
-        largest = right;
-    }
-}
+    //if largest found element does not equal the imput we will rebalance heap.
     if (largest != i) { //largest was not the parent
         
         swap_PCB(pcbHeap.at(i), pcbHeap.at(largest));
@@ -92,12 +92,14 @@ void MaxHeap::pop_top(){
     if(isEmpty()==true){
         cout << "Queue is empty" << endl;
     }
+    //if there is only one element in the heap you will pop that element and empty heap
     else if(size ==1){
         PCB* ref_PCB = pcbHeap.at(0);
         ref_PCB->set_STATE(pcbSate::STATE::RUNNING);
         pcbHeap.pop_back();
         size--;
     }
+    //else you will pop element out of heap and than rebalance the heap
     else{
         swap_PCB(pcbHeap.at(0), pcbHeap.at(size - 1));
         PCB* ref_PCB = pcbHeap.at(size-1);
@@ -107,7 +109,7 @@ void MaxHeap::pop_top(){
         heapify(0);
     }
 }
-
+//lets you see the front element of the heap
 PCB* MaxHeap::peek_min(){
     if(isEmpty()==true){
         cout << "Queue is empty!" << endl;
@@ -131,6 +133,7 @@ void MaxHeap::swap_PCB(PCB *a, PCB *b){
     b->set_PID(tempPID);
 
 }
+//used to swap the elements of the heap
 void MaxHeap::swap(int &a, int &b){
     int temp = a;
     a = b;
@@ -138,18 +141,22 @@ void MaxHeap::swap(int &a, int &b){
 };
 
 
-
+//Function to display the heap
 void MaxHeap::display()
 {
-    size = pcbHeap.size();
-    unsigned int j = pcbHeap.size();
+    size = pcbHeap.size();//stores the vector size into the heap size
+    unsigned int j = pcbHeap.size(); // stores the vector size into a int variable
+    //if statement to display if the vector is empty or not
     if (pcbHeap.size()==0) {
         std::cout << "empty\n";
     }
+    //if vector is not empty we drop into a for loop for display
+    else {
+        //for loop to display to screen
+        for (unsigned int i = 0; i < j; ++i) {
+            //print statment to show contents or each element of the vector
+            cout << "Process ID: " << setw(3) << pcbHeap[i]->PID <<" " << setw(10) << "Priority: " << setw(3) << pcbHeap[i]->priority << " " << setw(10) << "Current State: " << setw(3) << pcbSate::enumList[pcbHeap[i]->currentState] << "\n";
 
-    for (unsigned int i = 0; i < j; ++i) {
-
-        cout << "Process ID:"<<setw(8) << pcbHeap[i]->PID <<setw(10)<< "Priority:"<<setw(8) << pcbHeap[i]->priority << setw(10) << "Current State:"<<setw(8) << pcbSate::enumList[ pcbHeap[i]->currentState] << "\n";
-
+        }
     }
 }

@@ -15,6 +15,7 @@ public:
 	std::vector<PCB*> pcbHeap;
 	MaxHeap();
 	MaxHeap(int size);
+	//functions located in the class function
 	int getSize();
 	int getCapacity();
 	void insert_PCB(PCB& new_PCB);

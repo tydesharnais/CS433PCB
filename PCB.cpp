@@ -18,7 +18,7 @@ PCB::PCB(int PID, int priority) {
     this->priority = priority;
     this->currentState = pcbSate::STATE::NEW;
 };
-
+//basic getter and setter functions for the PCB class
 int PCB::get_PID() { return PID; };
 void PCB::set_PID(int num) { PID = num; };
 void PCB::set_PRIORITY(int num) { priority = num; };

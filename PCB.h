@@ -21,6 +21,7 @@ public:
     pcbSate::STATE currentState;
     int PID;   //Process ID - static 
     int priority; //Number from 1 to 50
+    //functions located in the Class file
 	PCB();
 	PCB(int);
     PCB(int, int);

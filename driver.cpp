@@ -14,7 +14,7 @@ at the top to create a system for easy removal based on priority.
 #include <iostream>
 #include <iomanip>
 #include <string>
-#include <stdlib.h> //srand, rand
+#include <stdlib.h>
 #include <time.h>
 #include <map>
 #include "ReadyQueue.h"
@@ -100,6 +100,7 @@ void test1(ReadyQueue& q1)
         q1.display();
     }
     // END OF TEST 1
+    cout << "____________________END________TEST____1____________________________";
 }
 void test2(ReadyQueue& q2) {
     cout << "__________________________START_____OF______TEST_2_________________________\n";

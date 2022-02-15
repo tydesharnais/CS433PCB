@@ -8,6 +8,7 @@ class ReadyQueue {
 public:
 	MaxHeap heap;
 	ReadyQueue();
+	//functions located in the class object
 	void display();
 	void addPCB(PCB& ref_PCB);
 	void removePCB();
